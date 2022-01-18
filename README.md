@@ -35,14 +35,36 @@ Propojení logiky s prvky sample
 ```
 fx:controller="com.example.gradletry.HelloController">
 ```
+![image](https://user-images.githubusercontent.com/90755554/149891654-4170630e-aeff-40ed-afef-83565bb08764.png)
+
 <b>Akce při spuštění</b>
 ```
 implements Initializable
-public class HelloApplication extends Application implements Initializable
+public class HelloController implements Initializable {
 
  @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
+```
+
+Adding attributes
+---
+
+![image](https://user-images.githubusercontent.com/90755554/149893722-df5656ee-9f3c-4001-ace3-f5fefa2c2375.png)
+![image](https://user-images.githubusercontent.com/90755554/149893795-925d6217-8f90-4f9b-9800-4f1046a1ce3f.png)
+
+Canvas example
+---
+view.fxml
+```
+<Canvas fx:id="canvas" height="400.0" width="600.0" onMouseMoved="#onMouseMove"/>
+```
+Controller.java
+```
+public void onMouseMove(MouseEvent mouseEvent) {
+        gc.setFill(Paint.valueOf("BLACK"));
+        gc.fillOval(mouseEvent.getX(), mouseEvent.getY(), 5, 5);
+    }
 ```
