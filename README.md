@@ -29,3 +29,20 @@ Java Fx Text sample
     <Button text="Hello!" onAction="#onHelloButtonClick"/>
 </VBox>
 ```
+Propojení logiky s prvky sample
+---
+
+```
+fx:controller="com.example.gradletry.HelloController">
+```
+<b>Akce při spuštění</b>
+```
+implements Initializable
+public class HelloApplication extends Application implements Initializable
+
+ @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
+```
