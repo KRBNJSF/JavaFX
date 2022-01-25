@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<VBox fx:id="mainLayout" alignment="CENTER" onKeyPressed="#keyPressed" onKeyReleased="#keyReleased" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gradletry.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <children>
+      <Label fx:id="label" onMouseMoved="#getCoords" prefHeight="17.0" prefWidth="31.0" text="ahoj" />
+        <Canvas fx:id="canvas" height="400.0" onMouseMoved="#onMouseMove" width="600.0" />
+      <Circle fx:id="ball" fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+        <Button mnemonicParsing="false" onMouseClicked="#onClickJump" text="Button" />
+    </children>
+</VBox>
