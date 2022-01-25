@@ -68,3 +68,119 @@ public void onMouseMove(MouseEvent mouseEvent) {
         gc.fillOval(mouseEvent.getX(), mouseEvent.getY(), 5, 5);
     }
 ```
+Funkčnost onClick metody bez tlačítek
+---
+```
+Platform.runLater(() -> {
+            mainLayout.requestFocus();
+        });
+```
+Potřebné k práci s grafickými prvky
+```
+GraphicsContext gc;
+```
+```
+gc = canvas.getGraphicsContext2D();
+```
+<b>Character printout to console</b>
+```
+public void keyPressed(KeyEvent keyEvent) {
+        System.out.println(keyEvent.getText());
+    }
+```
+Object animation
+---
+Vytvoř class Entity ->
+```
+package com.example.gradletry;
+
+import javafx.scene.paint.Paint;
+
+public class Entity {
+
+    private double x;
+    private double y;
+    private double width;
+    private double height;
+    private Paint color;
+
+    public Entity(double x, double y, double width, double height, Paint color) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.color = color;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public Paint getColor() {
+        return color;
+    }
+
+    public void setColor(Paint color) {
+        this.color = color;
+    }
+    
+}
+
+```
+Pohyb objektu po obrazovce
+```
+public void keyPressed(KeyEvent keyEvent) {
+        //System.out.print(keyEvent.getText());
+        if (keyEvent.getText().equalsIgnoreCase("w")) {
+            entity.setY(entity.getY() - 1);
+            ball.setTranslateY(ball.getTranslateY() - 20);
+        }
+
+        if (keyEvent.getText().equalsIgnoreCase("s")) {
+            entity.setY(entity.getY() + 1);
+            ball.setTranslateY(ball.getTranslateY() + 20);
+
+        }
+        if (keyEvent.getText().equalsIgnoreCase("a")) {
+            entity.setX(entity.getX() - 1);
+            ball.setTranslateX(ball.getTranslateX() - 20);
+        }
+        if (keyEvent.getText().equalsIgnoreCase("d")) {
+            ball.setTranslateX(ball.getTranslateX() + 20);
+            entity.setX(entity.getX() + 1);
+        }
+
+        gc.setFill(Paint.valueOf("WHITE"));
+        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        gc.setFill(entity.getColor());
+        gc.fillRect(entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight());
+    }
+```
