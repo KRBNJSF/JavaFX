@@ -94,7 +94,11 @@ Vytvoř class Entity ->
 ```
 package com.example.gradletry;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Paint;
+
+import java.util.ArrayList;
 
 public class Entity {
 
@@ -110,6 +114,27 @@ public class Entity {
         this.width = width;
         this.height = height;
         this.color = color;
+    }
+
+    public void update(ArrayList<String> input) {
+        if (input.contains("w")) {
+            setY(getY() - 1);
+        }
+
+        if (input.contains("s")) {
+            setY(getY() + 1);
+        }
+        if (input.contains("a")) {
+            setX(getX() - 1);
+        }
+        if (input.contains("d")) {
+            setX(getX() + 1);
+        }
+    }
+
+    public void render(GraphicsContext gc) {
+        gc.setFill(color);
+        gc.fillRect(x, y, width, height);
     }
 
     public double getX() {
@@ -151,36 +176,61 @@ public class Entity {
     public void setColor(Paint color) {
         this.color = color;
     }
-    
+
 }
 
+
 ```
-Pohyb objektu po obrazovce
+<b>Pohyb objektu po obrazovce</b>
 ```
 public void keyPressed(KeyEvent keyEvent) {
         //System.out.print(keyEvent.getText());
-        if (keyEvent.getText().equalsIgnoreCase("w")) {
-            entity.setY(entity.getY() - 1);
-            ball.setTranslateY(ball.getTranslateY() - 20);
+        if (!input.contains(keyEvent.getText())) {
+            input.add(keyEvent.getText());
         }
+```
 
-        if (keyEvent.getText().equalsIgnoreCase("s")) {
-            entity.setY(entity.getY() + 1);
-            ball.setTranslateY(ball.getTranslateY() + 20);
-
-        }
-        if (keyEvent.getText().equalsIgnoreCase("a")) {
-            entity.setX(entity.getX() - 1);
-            ball.setTranslateX(ball.getTranslateX() - 20);
-        }
-        if (keyEvent.getText().equalsIgnoreCase("d")) {
-            ball.setTranslateX(ball.getTranslateX() + 20);
-            entity.setX(entity.getX() + 1);
-        }
-
+```
+private void clearCanvas() {
         gc.setFill(Paint.valueOf("WHITE"));
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        gc.setFill(entity.getColor());
-        gc.fillRect(entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight());
+    }
+
+    public void update() {
+        entity.update(input);
+    }
+
+    public void render() {
+        entity.render(gc);
+    }
+```
+<b>Main loop</b>
+```
+ @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        input = new ArrayList<>();
+        gc = canvas.getGraphicsContext2D();
+        /*
+        gc.setFill(Paint.valueOf("ORANGE"));
+        gc.fillRect(100, 200, 200, 400);
+         */
+        entity = new Entity(10, 10, 20, 30, Paint.valueOf("PINK"));
+
+        Platform.runLater(() -> {
+            mainLayout.requestFocus();
+        });
+
+        mainLoop = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                //clear canvas
+                clearCanvas();
+                //update
+                update();
+                //render
+                render();
+            }
+        };
+        mainLoop.start();
     }
 ```
