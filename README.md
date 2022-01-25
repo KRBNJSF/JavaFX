@@ -107,28 +107,38 @@ public class Entity {
     private double width;
     private double height;
     private Paint color;
+    private float velocity;
 
-    public Entity(double x, double y, double width, double height, Paint color) {
+    public float getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(float velocity) {
+        this.velocity = velocity;
+    }
+
+    public Entity(double x, double y, double width, double height, Paint color, float velocity) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.color = color;
+        this.velocity = velocity;
     }
 
     public void update(ArrayList<String> input) {
         if (input.contains("w")) {
-            setY(getY() - 1);
+            setY(getY() - velocity);
         }
 
         if (input.contains("s")) {
-            setY(getY() + 1);
+            setY(getY() + velocity);
         }
         if (input.contains("a")) {
-            setX(getX() - 1);
+            setX(getX() - velocity);
         }
         if (input.contains("d")) {
-            setX(getX() + 1);
+            setX(getX() + velocity);
         }
     }
 
@@ -180,6 +190,7 @@ public class Entity {
 }
 
 
+
 ```
 <b>Pohyb objektu po obrazovce</b>
 ```
@@ -203,6 +214,7 @@ private void clearCanvas() {
     public void render() {
         entity.render(gc);
     }
+    
 ```
 <b>Main loop</b>
 ```
@@ -214,7 +226,7 @@ private void clearCanvas() {
         gc.setFill(Paint.valueOf("ORANGE"));
         gc.fillRect(100, 200, 200, 400);
          */
-        entity = new Entity(10, 10, 20, 30, Paint.valueOf("PINK"));
+        entity = new Entity(10, 10, 20, 30, Paint.valueOf("PINK"), 5.1f);
 
         Platform.runLater(() -> {
             mainLayout.requestFocus();
