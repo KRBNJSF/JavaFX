@@ -90,6 +90,8 @@ public void keyPressed(KeyEvent keyEvent) {
 ```
 Object animation
 ---
+<b><a href="https://github.com/KRBNJSF/JavaFX/tree/main/src/main/java/com/example/gradletry">Source code</a></b><br>
+
 Vytvoř class Entity ->
 ```
 package com.example.gradletry;
