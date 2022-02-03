@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
@@ -39,7 +40,8 @@ public class HelloController implements Initializable {
         gc.setFill(Paint.valueOf("ORANGE"));
         gc.fillRect(100, 200, 200, 400);
          */
-        entity = new Entity(10, 10, 20, 30, Paint.valueOf("PINK"), 5.1f);
+        entity = new Entity(10, 10, 20, 30, Color.color(Math.random(), Math.random(), Math.random(), Math.random()), 5.1f);
+        spawnEntities(10);
 
         Platform.runLater(() -> {
             mainLayout.requestFocus();
@@ -52,6 +54,7 @@ public class HelloController implements Initializable {
                 clearCanvas();
                 //update
                 update();
+                checkCollision();
                 //render
                 render();
             }
@@ -65,18 +68,47 @@ public class HelloController implements Initializable {
     }
 
     public void update() {
-        entity.update(inputList);
+        entity.update(inputList, canvas);
     }
 
     public void render() {
         entity.render(gc);
+        entitiesList.forEach(obj -> {
+            obj.render(gc);
+        });
     }
 
     private void spawnEntities(int number) {
         Random random = new Random();
         for (int i = 0; i < number; i++) {
-            entitiesList.add(new Entity(random.nextInt()));
+            entitiesList.add(new Entity(generate(0, canvas.getWidth()), generate(0, canvas.getHeight()), generate(10, 30), generate(10, 30), Color.color(Math.random(), Math.random(), Math.random(), Math.random()), 1.1f));
         }
+    }
+
+    private void checkCollision() {
+        for (Entity obj : entitiesList) {
+            if (entity.getX() < obj.getX() + obj.getWidth() &&
+                    entity.getX() + obj.getWidth() > obj.getX() &&
+                    entity.getY() < obj.getY() + obj.getHeight() &&
+                    entity.getHeight() + entity.getY() > obj.getY()) {
+                obj.setColor(Color.color(Math.random(), Math.random(), Math.random(), Math.random()));
+                entitiesList.remove(obj);
+                break;
+            }
+        }
+       /* entitiesList.forEach(obj -> {
+            if (entity.getX() < obj.getX() + obj.getWidth() &&
+                    entity.getX() + obj.getWidth() > obj.getX() &&
+                    entity.getY() < obj.getY() + obj.getHeight() &&
+                    entity.getHeight() + entity.getY() > obj.getY()) {
+                obj.setColor(Color.color(Math.random(), Math.random(), Math.random(), Math.random()));
+                entitiesList.remove(obj);
+            }
+        });*/
+    }
+
+    private int generate(int min, double max) {
+        return min + (int) (Math.random() * ((max - min) + 1));
     }
 
     public void onMouseMove(MouseEvent mouseEvent) {

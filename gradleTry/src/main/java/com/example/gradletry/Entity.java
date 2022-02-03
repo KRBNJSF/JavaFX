@@ -1,5 +1,6 @@
 package com.example.gradletry;
 
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Paint;
@@ -32,19 +33,31 @@ public class Entity {
         this.velocity = velocity;
     }
 
-    public void update(ArrayList<String> input) {
+    public void update(ArrayList<String> input, Canvas canvas) {
         if (input.contains("w")) {
             setY(getY() - velocity);
+            if (y + height < 0) {
+                y = canvas.getHeight();
+            }
         }
 
         if (input.contains("s")) {
             setY(getY() + velocity);
+            if (y > canvas.getHeight()) {
+                y = -height;
+            }
         }
         if (input.contains("a")) {
             setX(getX() - velocity);
+            if (x + height < 0) {
+                x = canvas.getWidth();
+            }
         }
         if (input.contains("d")) {
             setX(getX() + velocity);
+            if (x > canvas.getWidth()) {
+                x = -width;
+            }
         }
     }
 
