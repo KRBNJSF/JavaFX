@@ -389,3 +389,8 @@ public class Entity {
 
 10.2. 2022
 ---
+https://www.tutorialspoint.com/javafx/javafx_2d_shapes.htm
+
+https://docs.oracle.com/javase/8/javafx/api/javafx/scene/canvas/GraphicsContext.html
+
+https://www.algoritmy.net/article/1396/Boruvkuv-algoritmus
