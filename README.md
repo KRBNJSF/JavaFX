@@ -428,6 +428,10 @@ https://stackoverflow.com/questions/57019143/build-executable-jar-with-javafx11-
 
 ![image](https://user-images.githubusercontent.com/90755554/154493160-9809df50-1960-49a2-8d50-fe29fdd95107.png)
 
+ctrl + ctrl
+
+![image](https://user-images.githubusercontent.com/90755554/154493771-875a62c0-566e-433e-8e75-56b8fa8279b0.png)
+
 ![image](https://user-images.githubusercontent.com/90755554/154493548-495b0ca6-61b8-436a-bb7b-cabb054aa9ef.png)
 
 
