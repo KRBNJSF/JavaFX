@@ -394,3 +394,42 @@ https://www.tutorialspoint.com/javafx/javafx_2d_shapes.htm
 https://docs.oracle.com/javase/8/javafx/api/javafx/scene/canvas/GraphicsContext.html
 
 https://www.algoritmy.net/article/1396/Boruvkuv-algoritmus
+
+17.2. 2022
+---
+Executable .jar file JavaFX
+
+https://stackoverflow.com/questions/57019143/build-executable-jar-with-javafx11-from-maven
+
+```
+<plugin>
+    <artifactId>maven-shade-plugin</artifactId>
+    <version>3.2.1</version>
+    <executions>
+        <execution>
+            <phase>package</phase>
+            <goals>
+                <goal>shade</goal>
+            </goals>
+            <configuration>
+                <transformers>
+                    <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                        <mainClass>my.package.name.SuperMain</mainClass>
+                    </transformer>
+                </transformers>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+
+![image](https://user-images.githubusercontent.com/90755554/154493401-6115ef4f-e83e-46d7-a36e-176a3f0899b2.png)
+
+
+![image](https://user-images.githubusercontent.com/90755554/154493160-9809df50-1960-49a2-8d50-fe29fdd95107.png)
+
+![image](https://user-images.githubusercontent.com/90755554/154493548-495b0ca6-61b8-436a-bb7b-cabb054aa9ef.png)
+
+
+
+
